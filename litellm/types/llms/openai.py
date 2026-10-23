@@ -895,6 +895,7 @@ class OpenAIChatCompletionAssistantMessage(TypedDict, total=False):
             | ChatCompletionThinkingBlock
             | ChatCompletionRedactedThinkingBlock
             | ChatCompletionImageObject
+            | ChatCompletionFileObject
         ]
         | None
     )
@@ -918,7 +919,11 @@ class ChatCompletionToolReferenceObject(TypedDict):
 
 
 ToolMessageContentPart: TypeAlias = (
-    ChatCompletionTextObject | ChatCompletionImageObject | ChatCompletionToolReferenceObject
+    ChatCompletionTextObject
+    | ChatCompletionImageObject
+    | ChatCompletionAudioObject
+    | ChatCompletionFileObject
+    | ChatCompletionToolReferenceObject
 )
 
 

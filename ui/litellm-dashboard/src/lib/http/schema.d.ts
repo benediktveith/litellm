@@ -28688,7 +28688,7 @@ export interface components {
         ChatCompletionAssistantMessage: {
             cache_control?: components["schemas"]["ChatCompletionCachedContent"];
             /** Content */
-            content?: string | (components["schemas"]["ChatCompletionTextObject"] | components["schemas"]["ChatCompletionThinkingBlock"] | components["schemas"]["ChatCompletionRedactedThinkingBlock"] | components["schemas"]["ChatCompletionImageObject"])[] | null;
+            content?: string | (components["schemas"]["ChatCompletionTextObject"] | components["schemas"]["ChatCompletionThinkingBlock"] | components["schemas"]["ChatCompletionRedactedThinkingBlock"] | components["schemas"]["ChatCompletionImageObject"] | components["schemas"]["ChatCompletionFileObject"])[] | null;
             function_call?: components["schemas"]["ChatCompletionToolCallFunctionChunk"] | null;
             /** Name */
             name?: string | null;
@@ -29000,7 +29000,7 @@ export interface components {
         /** ChatCompletionToolMessage */
         ChatCompletionToolMessage: {
             /** Content */
-            content: string | (components["schemas"]["ChatCompletionTextObject"] | components["schemas"]["ChatCompletionImageObject"] | components["schemas"]["ChatCompletionToolReferenceObject"])[];
+            content: string | (components["schemas"]["ChatCompletionTextObject"] | components["schemas"]["ChatCompletionImageObject"] | components["schemas"]["ChatCompletionAudioObject"] | components["schemas"]["ChatCompletionFileObject"] | components["schemas"]["ChatCompletionToolReferenceObject"])[];
             /**
              * Role
              * @constant

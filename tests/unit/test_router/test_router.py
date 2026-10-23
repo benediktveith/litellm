@@ -30149,3 +30149,21 @@ def test_request_carries_image_sees_chat_parts_and_responses_input_items():
     assert litellm.Router._request_carries_image(None, {"input": _IMAGE_RESPONSES_INPUT}) is True
     assert litellm.Router._request_carries_image([{"role": "user", "content": "Say hi"}], {}) is False
     assert litellm.Router._request_carries_image(None, {"input": "Say hi"}) is False
+
+
+@pytest.mark.parametrize("info_base,params_base", [(None, None), (None, "gpt-5.1"), ("gpt-6-astra", "gpt-5.1")])
+def test_resolved_litellm_models_can_use_configured_base_model(
+    info_base: str | None, params_base: str | None,
+) -> None:
+    router: Final = Router(
+        model_list=[{
+            "model_name": "deployment", "litellm_params": {
+                "model": "azure/custom-name", "api_key": "test", "api_base": "https://example.invalid",
+                "api_version": "2024-12-01-preview", **({"base_model": params_base} if params_base else {}),
+            }, "model_info": {"base_model": info_base},
+        }], model_group_alias={"alias": "deployment"},
+    )
+    assert router.resolved_litellm_models("alias") == ("azure/custom-name",)
+    assert router.resolved_litellm_models("alias", use_base_model=True) == (
+        info_base or params_base or "azure/custom-name",
+    )

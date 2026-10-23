@@ -47456,6 +47456,9 @@
                       },
                       {
                         "$ref": "#/components/schemas/ChatCompletionImageObject"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ChatCompletionFileObject"
                       }
                     ]
                   },
@@ -48133,6 +48136,12 @@
                       },
                       {
                         "$ref": "#/components/schemas/ChatCompletionImageObject"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ChatCompletionAudioObject"
+                      },
+                      {
+                        "$ref": "#/components/schemas/ChatCompletionFileObject"
                       },
                       {
                         "$ref": "#/components/schemas/ChatCompletionToolReferenceObject"

@@ -13795,7 +13795,9 @@ class Router:
         ]
         return named or self._get_wildcard_deployments(model_name=model_group)
 
-    def resolved_litellm_models(self, model_name: str, team_id: str | None = None) -> tuple[str, ...]:
+    def resolved_litellm_models(
+        self, model_name: str, team_id: str | None = None, *, use_base_model: bool = False
+    ) -> tuple[str, ...]:
         """The provider model strings `model_name` can actually be served by on this proxy.
 
         `get_model_list` composes every channel the request path itself uses (exact name,
@@ -13808,6 +13810,11 @@ class Router:
         deployment behind it - so the fallback for an empty result is the caller's policy,
         never this function's.
         """
+        if use_base_model:
+            return tuple(
+                self._cost_map_backend_model(Deployment.model_validate(deployment))
+                for deployment in self.get_model_list(model_name=model_name, team_id=team_id) or ()
+            )
         return tuple(
             litellm_model
             for deployment in self.get_model_list(model_name=model_name, team_id=team_id) or ()
